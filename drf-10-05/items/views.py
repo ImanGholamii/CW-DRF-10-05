@@ -4,18 +4,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Item, CustomerOrder, Category, SellRecord
 from drf_yasg.utils import swagger_auto_schema
-from functools import wraps
+from rest_framework.permissions import IsAuthenticated
 
 
-def authenticated_user_required(func):
-    @wraps(func)
-    def wrapper(request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return Response("Authentication required", status=status.HTTP_401_UNAUTHORIZED)
-        return func(request, *args, **kwargs)
-    return wrapper
 class GetItemsAPIView(APIView):
-    @authenticated_user_required
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         item = Item.objects.all()
         serializer = ItemSerializer(item, many=True)
