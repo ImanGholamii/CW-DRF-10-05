@@ -37,10 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third Party Apps
+    'rest_framework',
+    'rest_framework.authtoken',
+    'drf_yasg',
+
+    # My Apps
     'items',
     'accounts',
-    'rest_framework',
-    'drf_yasg',
+
 ]
 
 MIDDLEWARE = [
@@ -130,8 +136,9 @@ AUTH_USER_MODEL = 'accounts.MyUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
 
     ),
 
