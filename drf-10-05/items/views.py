@@ -1,10 +1,17 @@
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from .serializers import ItemSerializer, CategorySerializer, CustomerOrderSerializer, SellRecordSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Item, CustomerOrder, Category, SellRecord
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import IsAuthenticated
+
+
+
+class ItemViewSet(ModelViewSet):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
 
 
 class GetItemsAPIView(APIView):
